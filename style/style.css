@@ -1,0 +1,75 @@
+#header {
+       font-family: Comic Sans MS, Comic Sans, cursive;
+       font-size: 20pt;
+       color: #576333;
+       padding-bottom: 20px;
+     }
+     #svg {
+       width: 900px;
+       background-color: inherit;
+     }
+     .graph .labels.x-labels {
+       text-anchor: middle;
+     }
+
+     .graph .labels.y-labels {
+       text-anchor: end;
+     }
+
+     .graph {
+       height: 540px;
+       width: 540px;
+       border: 2px solid black;
+       background: #e3d9da;
+     }
+
+     .graph .grid {
+       stroke: black;
+       stroke-dasharray: 0;
+       stroke-width: 1;
+     }
+
+     .labels {
+       font-size: 13px;
+     }
+
+     .label-title {
+       font-weight: bold;
+       text-transform: uppercase;
+       font-size: 12px;
+       fill: black;
+     }
+
+     .data {
+       fill: #bb4b64 ;
+       stroke-width: 1;
+       opacity: 60%;
+     }
+
+     .top div {
+       display: inline-block;
+     }
+
+     #resultSet {
+       border-collapse: collapse;
+     }
+     #tableHead {
+       border-bottom: 3px solid #B9B29F;
+       padding: 10px;
+       text-align: left;
+     }
+     #tableHead th {
+       padding-left: 30px;
+     }
+     .tableCell {
+       padding: 10px;
+     }
+     .tableCell:nth-child(odd) {
+       background: white;
+     }
+     .tableCell:nth-child(even) {
+       background: #acb299;
+     }
+     .tableCell td {
+       padding-left: 30px;
+     }
