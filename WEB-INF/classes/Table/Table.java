@@ -36,4 +36,11 @@ public class Table{
 	public double getR(){
 		return this.r;
 	}
+	public String getColor(){
+		if (this.hit.equals("Попадание")){
+			return "green";
+		}else {
+			return "black";
+		}
+	}
 }

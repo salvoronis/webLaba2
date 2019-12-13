@@ -170,7 +170,7 @@
 		       		Table[] table = (Table[]) session.getAttribute("cell");
 		       		for (int i = 0; i<table.length; i++){
 		       	%>
-		       		<circle style="fill: green" cx="<%=table[i].getX()+270%>" cy="<%=Math.abs(table[i].getY()-270)%>" r="4"/>
+		       		<circle style="fill: <%=table[i].getColor()%>" cx="<%=table[i].getX()+270%>" cy="<%=Math.abs(table[i].getY()-270)%>" r="4"/>
 		       	<%System.out.println(table[i].getY());
 		    	}}
 		       	%>
