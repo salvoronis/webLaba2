@@ -20,9 +20,16 @@ public class AreaCheckServlet extends HttpServlet{
 
 		HttpSession session = req.getSession();
 
-		int x = Integer.parseInt(req.getParameter("x"));
-		int y = Integer.parseInt(req.getParameter("y"));
-		int r = Integer.parseInt(req.getParameter("r"));
+		double x = Double.parseDouble(req.getParameter("x"));
+		double y = Double.parseDouble(req.getParameter("y"));
+		double r = Double.parseDouble(req.getParameter("r"));
+
+		x*=50.0;
+		y*=50.0;
+		r*=50.0;
+
+		System.out.println(x+" "+y+" "+r);
+
 		int kolvo = 1;
 		Table[] chasatri;
 
@@ -45,28 +52,16 @@ public class AreaCheckServlet extends HttpServlet{
 		chasatri[kolvo-1] = elem;
 
 		session.setAttribute("cell", chasatri);
-
-		/*Table[] mda = (Table[]) session.getAttribute("cell");
-		System.out.println(mda[0]);
-		for (int i = 0; i < mda.length-1; i++){
-			System.out.println(i);
-			System.out.println(mda[i].getHit());
-		}*/
 	}
-	private String checkOutThisShit(int x,int y, int r){
+	private String checkOutThisShit(double x,double y, double r){
 		if((x <= 0) && (y <= 0) && (x >= (-r/2)) && (y >= -r)){
 			return "Попадпние";
 		} else
 		if((x >= 0) && (y <= 0) && (y >= x-(r/2))){
 			return "Попадание";
 		}else
-		if((x <= 0) && (y >= 0)){
-			double d = Math.sqrt(Math.pow((Math.abs(x)-r), 2)) + Math.sqrt(Math.pow((y-r), 2));
-			if (d <= r){
-				return "Попадание";
-			}else {
-				return "Промах";
-			}
+		if((x <= 0) && (y >= 0) && ((Math.pow((Math.abs(x)), 2) + Math.pow((y), 2))<=Math.pow(r, 2))){
+			return "Попадание";
 		}else{
 			return "Промах";
 		}

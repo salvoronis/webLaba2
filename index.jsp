@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="Table.Table"%>
 <!DOCTYPE html>
 <html>
  <head lang="en" xmlns:https="http://www.w3.org/1999/xhtml">
@@ -8,22 +9,39 @@
    <script src="http://code.jquery.com/jquery-latest.js"></script>
    <script src="lib/date.format.js"></script>
    <script type="text/javascript">
-     $(function(){
-       $("input").keydown(function(event){
-        if(event.keyCode == 13){
-          event.preventDefault();
-          return false;
-        }
-      });
-       $('.radcheck').click(function(){
-         $('.radcheck').removeAttr('checked','checked');
-         $(this).prop('checked', true);
-       });
-       $('.xdim').click(function(){
-         $('.xdim').removeAttr('checked','checked');
-         $(this).prop('checked', true);
-       });
-     });
+    $(function(){
+    	doFig($("#radius").val());
+
+    	$("#radius").change(function(){
+    		doFig($("#radius").val());
+    	});
+       	$("input").keydown(function(event){
+        	if(event.keyCode == 13){
+          		event.preventDefault();
+          		return false;
+        	}
+      	});
+       	$('.radcheck').click(function(){
+         	$('.radcheck').removeAttr('checked','checked');
+         	$(this).prop('checked', true);
+       	});
+       	$('.xdim').click(function(){
+         	$('.xdim').removeAttr('checked','checked');
+         	$(this).prop('checked', true);
+       	});
+
+        $(".graph").on('click', function(e){
+           	e.preventDefault();
+           	$.ajax({
+             	type: "POST",
+             	url: "/ctrl",
+             	data: 'x='+((e.clientX-280.0)/50.0)+'&y='+((250.0-(e.pageY-90.0))/50.0)+'&r='+$('#radius :selected').val(),
+             	success: function(response){
+               		console.log("ok");
+               	}
+           	});
+       	});
+    });
      var counter = 0;
      function addToTable (hit, stime,x,y,r){
        $("#resultSet tr:last").after('<tr class="tableCell"><td>'+counter+'</td><td>'+hit+'</td><td>'+new Date().format("HH:MM:ss")+'</td><td>'+stime+'</td><td>'+x+'</td><td>'+y+'</td><td>'+r+'</td></tr>');
@@ -56,9 +74,6 @@
           url: "/ctrl",
           data: 'x='+x+'&y='+ydim+'&r='+radius,
           success: function(response){
-            	//var answer = response.split(" ");
-            	//counter++;
-            	//addToTable(answer[1], answer[2], x,ydim,radius);
             	console.log("ok");
             },
           error : function(data){
@@ -119,10 +134,10 @@
    </script>
  </head>
  <body>
-   <div id="header">
-    	${cell[0]}Яремко Роман Группа: R3236(P3202) Вариант: 202023
-   </div>
-   <div class="top">
+   	<div id="header">
+    	Яремко Роман Группа: R3236(P3202) Вариант: 202023
+   	</div>
+   	<div class="top">
          <div id="svg">
            <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img">
              <title id="title">хех лол</title>
@@ -163,25 +178,25 @@
                <tr>
                  <td></td>
                  <td>-2</td>
-                 <td>-1,5</td>
+                 <td>-1.5</td>
                  <td>-1</td>
-                 <td>-0,5</td>
+                 <td>-0.5</td>
                  <td>0</td>
-                 <td>0,5</td>
+                 <td>0.5</td>
                  <td>1</td>
-                 <td>1,5</td>
+                 <td>1.5</td>
                  <td>2</td>
                </tr>
                <tr>
                  <td>x</td>
                  <td><input type="checkbox" class="xdim" value="-2"></td>
-                 <td><input type="checkbox" class="xdim" value="-1,5"></td>
+                 <td><input type="checkbox" class="xdim" value="-1.5"></td>
                  <td><input type="checkbox" class="xdim" value="-1"></td>
-                 <td><input type="checkbox" class="xdim" value="-0,5"></td>
+                 <td><input type="checkbox" class="xdim" value="-0.5"></td>
                  <td><input type="checkbox" class="xdim" value="0" checked></td>
-                 <td><input type="checkbox" class="xdim" value="0,5"></td>
+                 <td><input type="checkbox" class="xdim" value="0.5"></td>
                  <td><input type="checkbox" class="xdim" value="1"></td>
-                 <td><input type="checkbox" class="xdim" value="1,5"></td>
+                 <td><input type="checkbox" class="xdim" value="1.5"></td>
                  <td><input type="checkbox" class="xdim" value="2"></td>
                </tr>
              </table>
@@ -200,7 +215,7 @@
                	</td>
                </tr>
              </table>
-             <input id="butt" type="button" onclick="pognali();" value="Построить">
+             <input id="butt" type="button" onclick="pognali();" value="Проверить">
            </form>
          </div>
    </div>
@@ -215,6 +230,23 @@
          <th>y</th>
          <th>r</th>
        </tr>
+       	<%
+       	if (session.getAttribute("cell") != null){
+       		Table[] table = (Table[]) session.getAttribute("cell");
+       		for (int i = 0; i<table.length; i++){
+       	%>
+       		<tr class="tableCell">
+       			<td><%=i%></td>
+       			<td><%=table[i].getHit()%></td>
+       			<td><%=table[i].getDate()%></td>
+       			<td><%=table[i].getTime()%></td>
+       			<td><%=table[i].getX()/50%></td>
+       			<td><%=table[i].getY()/50%></td>
+       			<td><%=table[i].getR()/50%></td>
+       		</tr>
+       	<%
+    	}}
+       	%>
      </table>
    </div>
  </body>

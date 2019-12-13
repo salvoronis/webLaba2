@@ -6,11 +6,11 @@ public class Table{
 	private String hit;
 	private Date date;
 	private long time;
-	private int x;
-	private int y;
-	private int r;
+	private double x;
+	private double y;
+	private double r;
 
-	public Table(String hit, Date date, long time, int x, int y, int r){
+	public Table(String hit, Date date, long time, double x, double y, double r){
 		this.hit = hit;
 		this.date = date;
 		this.time = time;
@@ -27,13 +27,13 @@ public class Table{
 	public long getTime(){
 		return this.time;
 	}
-	public int getX(){
+	public double getX(){
 		return this.x;
 	}
-	public int getY(){
+	public double getY(){
 		return this.y;
 	}
-	public int getR(){
+	public double getR(){
 		return this.r;
 	}
 }
