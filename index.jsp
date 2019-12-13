@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
  <head lang="en" xmlns:https="http://www.w3.org/1999/xhtml">
-   <meta charset="UTF-8">
-   <title>piha</title>
-   <link href="style/style.css" rel="stylesheet" type="text/css"/>
-   <script src="http://code.jquery.com/jquery-latest.js"></script>
-   <script src="lib/date.format.js"></script>
-   <script type="text/javascript">
+   	<meta charset="UTF-8">
+   	<title>piha</title>
+   	<link href="style/style.css" rel="stylesheet" type="text/css"/>
+   	<script src="http://code.jquery.com/jquery-latest.js"></script>
+   	<script src="lib/date.format.js"></script>
+   	<script type="text/javascript">
     $(function(){
     	doFig($("#radius").val());
 
@@ -42,10 +42,6 @@
            	});
        	});
     });
-     var counter = 0;
-     function addToTable (hit, stime,x,y,r){
-       $("#resultSet tr:last").after('<tr class="tableCell"><td>'+counter+'</td><td>'+hit+'</td><td>'+new Date().format("HH:MM:ss")+'</td><td>'+stime+'</td><td>'+x+'</td><td>'+y+'</td><td>'+r+'</td></tr>');
-     }
 
     function pognali(){
       var yok = false;
@@ -169,6 +165,15 @@
                  <rect class="meichu" x="195" y="270" width="75" height="150"/>
                  <polygon id="triangle" class="meichu" points="270,270 345,270 270,345"></polygon>
                  <path class="meichu" d="M 270 120 A 150 150, 90, 0, 0, 120 270 L 270 270 Z"></path>
+                <%
+		       	if (session.getAttribute("cell") != null){
+		       		Table[] table = (Table[]) session.getAttribute("cell");
+		       		for (int i = 0; i<table.length; i++){
+		       	%>
+		       		<circle style="fill: green" cx="<%=table[i].getX()+270%>" cy="<%=Math.abs(table[i].getY()-270)%>" r="4"/>
+		       	<%System.out.println(table[i].getY());
+		    	}}
+		       	%>
              </g>
            </svg>
          </div>

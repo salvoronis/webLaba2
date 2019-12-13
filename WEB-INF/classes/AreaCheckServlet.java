@@ -28,8 +28,6 @@ public class AreaCheckServlet extends HttpServlet{
 		y*=50.0;
 		r*=50.0;
 
-		System.out.println(x+" "+y+" "+r);
-
 		int kolvo = 1;
 		Table[] chasatri;
 
