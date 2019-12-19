@@ -51,6 +51,10 @@ public class AreaCheckServlet extends HttpServlet{
 
 		session.setAttribute("cell", chasatri);
 	}
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.getWriter().write("fuck");
+	}
 	private String checkOutThisShit(double x,double y, double r){
 		if((x <= 0) && (y <= 0) && (x >= (-r/2)) && (y >= -r)){
 			return "Попадпние";

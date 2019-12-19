@@ -34,7 +34,7 @@
            	e.preventDefault();
            	$.ajax({
              	type: "POST",
-             	url: "/ctrl",
+             	url: "/civilwar/ctrl", //for wildfly uri /civilwar/
              	data: 'x='+((e.clientX-280.0)/50.0)+'&y='+((250.0-(e.pageY-90.0))/50.0)+'&r='+$('#radius :selected').val(),
              	success: function(response){
                		console.log("ok");
@@ -67,7 +67,7 @@
         $('#kotae').remove();
         $.ajax({
           type: "POST",
-          url: "/ctrl",
+          url: "/civilwar/ctrl",
           data: 'x='+x+'&y='+ydim+'&r='+radius,
           success: function(response){
             	console.log("ok");
